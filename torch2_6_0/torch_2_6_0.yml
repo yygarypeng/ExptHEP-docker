@@ -1,0 +1,20 @@
+channels:
+    - conda-forge
+    - anaconda
+dependencies:
+    - python=3.11
+    - jupyter
+    - pandas
+    - pytables
+    - numba
+    - scipy
+    - matplotlib
+    - seaborn
+    - pydot    
+    - scikit-learn
+    - xgboost
+    - shap
+    - root
+    - uproot
+    - mplhep
+    - pip
