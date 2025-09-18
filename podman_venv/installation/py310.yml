@@ -1,0 +1,15 @@
+channels:
+    - conda-forge
+    - anaconda
+dependencies:
+    - python=3.10
+    - numpy    
+    - pandas
+    - pytables
+    - scipy
+    - matplotlib
+    - h5py
+    - root
+    - uproot
+    - mplhep
+    - pip
