@@ -5,8 +5,6 @@ parse_git_branch() {
 export PS1="\[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # Other alias
-alias lesf='less +F'
-alias lesg='less +G'
 alias cc='clear'
 alias data='cd ~/data/'
 alias work='cd ~/work/'
@@ -16,5 +14,5 @@ bind 'set show-all-if-ambiguous on'
 bind 'set completion-ignore-case on'
 bind 'TAB:menu-complete'
 
-# conda activate torch
+conda activate torch
 cd ~/work/

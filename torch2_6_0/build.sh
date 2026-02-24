@@ -1,1 +1,1 @@
-docker build -t pytorch-2.6.0:qe . --no-cache
+docker build -t ehep-torch-2.6.0:latest . --no-cache

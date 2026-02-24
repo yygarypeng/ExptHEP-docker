@@ -17,4 +17,6 @@ dependencies:
     - root
     - uproot
     - mplhep
-    - pip
+    - h5py
+    - pip:
+        - pytorch-lightning==2.4.0
