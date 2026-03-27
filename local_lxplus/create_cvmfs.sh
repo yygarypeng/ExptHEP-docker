@@ -14,7 +14,19 @@ sudo apt update
 sudo apt install -y cvmfs cvmfs-config-default
 
 echo "CVMFS_REPOSITORIES=atlas.cern.ch,atlas-condb.cern.ch,sft.cern.ch,atlas-nightlies.cern.ch,unpacked.cern.ch
-CVMFS_HTTP_PROXY=DIRECT" | sudo tee /etc/cvmfs/default.local
+
+CVMFS_HTTP_PROXY=DIRECT
+CVMFS_DNS_ROAMING=yes
+
+CVMFS_QUOTA_LIMIT=100000
+CVMFS_CACHE_BASE=/var/lib/cvmfs
+
+CVMFS_TIMEOUT=5
+CVMFS_TIMEOUT_DIRECT=10
+CVMFS_MAX_RETRIES=2
+
+CVMFS_NFILES=65536
+CVMFS_IPFAMILY_PREFER=4" | sudo tee /etc/cvmfs/default.local
 
 sudo cvmfs_config setup
 sudo cvmfs_config probe
