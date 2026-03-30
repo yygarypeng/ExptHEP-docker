@@ -19,4 +19,4 @@ dependencies:
     - mplhep
     - h5py
     - pip:
-        - pytorch-lightning==2.4.0
+        - pytorch-lightning==2.5.0
