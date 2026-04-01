@@ -1,5 +1,5 @@
-# LICENSE: MIT (Gary Peng: Feb. 24, 2026)
-# This dockerfile built on the Ubuntu 24.04.3 LTS with nv GPU driver Version 550.163.01 and `highest` CUDA version 12.4
+# LICENSE: MIT (Gary Peng: Apr. 01, 2026)
+# This dockerfile built on the Ubuntu 24.04.4 LTS with nv GPU driver Version 570.211.01 and `highest` CUDA version 12.8
 
 FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel
 

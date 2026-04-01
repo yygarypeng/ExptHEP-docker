@@ -14,9 +14,13 @@ dependencies:
     - scikit-learn
     - xgboost
     - shap
-    - root
     - uproot
     - mplhep
     - h5py
+    - wandb
+    - pytorch=2.6
+    - lightning=2.4
+    - root=6.38.02
+    - pip
     - pip:
-        - pytorch-lightning==2.5.0
+        - FrEIA
