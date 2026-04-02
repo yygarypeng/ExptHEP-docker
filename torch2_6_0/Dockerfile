@@ -7,28 +7,22 @@ LABEL maintainer="Gary Peng <yygarypeng@gapp.nthu.edu.tw>"
 
 ENV SUDO_FORCE_REMOVE=yes
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH=/opt/conda/bin:$PATH
 
-RUN buildDeps="git vim wget openssl htop glances" && \
+COPY torch_2_6_0.yml /root/torch_2_6_0.yml
+COPY bashrc.sh /root/bashrc.sh
+
+RUN buildDeps="git vim wget openssh-client htop" && \
     apt-get update && \
-    apt-get install --assume-yes apt-utils && \
-    apt-get install -y $buildDeps && \
-    apt-get autoremove -y && \
-    apt-get clean
-
-ADD installation/torch_2_6_0.yml /workspace/torch_2_6_0.yml
-RUN conda env create --name torch -f /workspace/torch_2_6_0.yml
-RUN conda init bash
-
-RUN mkdir ~/work/ && \
-    mkdir ~/data/
-
-ADD bashrc.sh /root/bashrc.sh
-RUN cat /root/bashrc.sh >> ~/.bashrc && \
-    rm /root/bashrc.sh
+    apt-get install --assume-yes --no-install-recommends apt-utils $buildDeps && \
+    rm -rf /var/lib/apt/lists/* && \
+    mamba env create --name torch -f /root/torch_2_6_0.yml && \
+    mamba clean -afy && \
+    mkdir -p /root/work /root/data && \
+    cat /root/bashrc.sh >> /root/.bashrc && \
+    rm -f /root/bashrc.sh /root/torch_2_6_0.yml
 
 # Add test code in home directory
-ADD test.py /root/test.py
-ADD gitconfig /root/.gitconfig
+COPY test.py /root/test.py
+COPY gitconfig /root/.gitconfig
 
 CMD ["/bin/bash"]

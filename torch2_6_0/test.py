@@ -5,8 +5,12 @@ import logging
 import warnings
 import numpy as np
 import torch
+import torchvision
+import torchaudio
+import xgboost
 from torch import nn, utils
 from sklearn.preprocessing import StandardScaler
+from importlib.metadata import version as pkg_version
 
 # -----------------------------
 # Lightning import (robust)
@@ -51,6 +55,21 @@ def run_suite():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     print("=" * 90)
+
+    # =========================================================
+    # 0. CORE STACK VERSION CHECK (equivalent to one-liner)
+    # =========================================================
+    print("\n[0] CORE STACK VERSION CHECK")
+    try:
+        print(f"torch: {torch.__version__}")
+        print(f"torchvision: {torchvision.__version__}")
+        print(f"torchaudio: {torchaudio.__version__}")
+        print(f"lightning: {pkg_version('lightning')}")
+        print(f"xgboost: {xgboost.__version__}")
+        print(f"torch CUDA runtime: {torch.version.cuda}")
+        print(f"CUDA available: {torch.cuda.is_available()}")
+    except Exception as e:
+        print(f"Core stack version check: FAILED | {e}")
 
     # =========================================================
     # 1. PACKAGE CHECK
@@ -202,6 +221,36 @@ def run_suite():
 
         except Exception as e:
             print(f"Lightning training: FAILED | {e}")
+
+    # =========================================================
+    # 7. XGBOOST TRAINING TEST
+    # =========================================================
+    print("\n[7] XGBOOST TRAINING TEST")
+    try:
+        X = np.random.randn(1000, 8)
+        y = ((X[:, 0] + 0.5 * X[:, 1] - 0.3 * X[:, 2]) > 0).astype(int)
+
+        split = 800
+        X_train, X_test = X[:split], X[split:]
+        y_train, y_test = y[:split], y[split:]
+
+        clf = xgboost.XGBClassifier(
+            n_estimators=80,
+            max_depth=4,
+            learning_rate=0.1,
+            subsample=0.9,
+            colsample_bytree=0.9,
+            objective="binary:logistic",
+            eval_metric="logloss",
+            random_state=42,
+        )
+        clf.fit(X_train, y_train)
+
+        y_pred = (clf.predict_proba(X_test)[:, 1] > 0.5).astype(int)
+        acc = (y_pred == y_test).mean()
+        print(f"XGBoost training: SUCCESS | accuracy={acc:.4f}")
+    except Exception as e:
+        print(f"XGBoost training: FAILED | {e}")
 
     print("\n" + "=" * 90)
     print("ALL TESTS COMPLETED")

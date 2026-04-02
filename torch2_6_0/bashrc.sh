@@ -14,5 +14,9 @@ bind 'set show-all-if-ambiguous on'
 bind 'set completion-ignore-case on'
 bind 'TAB:menu-complete'
 
+if [ -f /opt/conda/etc/profile.d/conda.sh ]; then
+     . /opt/conda/etc/profile.d/conda.sh
+fi
+
 conda activate torch
 cd ~/work/
