@@ -1,0 +1,31 @@
+name: torch
+channels:
+    - conda-forge
+dependencies:
+    - python=3.10
+    - root=6.38.02
+    - jupyter
+    - pandas
+    - pytables
+    - numba
+    - scipy
+    - matplotlib
+    - seaborn
+    - pydot    
+    - scikit-learn
+    - xgboost
+    - shap
+    - uproot
+    - mplhep
+    - h5py
+    - wandb
+    - pip
+    - pip:
+        # https://pytorch.org/get-started/previous-versions/
+        - --index-url https://download.pytorch.org/whl/cu118
+        - torch==2.5.1
+        - torchvision==0.20.1
+        - torchaudio==2.5.1
+        - --extra-index-url https://pypi.org/simple
+        - lightning==2.*
+        - FrEIA
