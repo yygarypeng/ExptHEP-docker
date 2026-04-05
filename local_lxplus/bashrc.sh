@@ -19,6 +19,7 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# mandatory for fastframes
+# mandatory for fastframes and ROOT 
 export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
 alias setupATLAS='source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh'
+export ALRB_rootVersion=6.36.02-x86_64-el9-gcc14-opt
